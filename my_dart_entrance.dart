@@ -1,6 +1,9 @@
 import 'Teacher.dart';
+import 'dart:async';
+import 'dart:math';
+import 'dart:core';
 
-main(List<String> mList) {
+main(List<String> mList) async {
   if (mList != null) print(mList);
 
   var smallZhou = new Student("周紫倩", 10);
@@ -27,6 +30,7 @@ main(List<String> mList) {
 //  fNum = 2;
 
   Test.main();
+  new Test()._id = 3;
 
   var list = const [10, 20, 30];
 //  list[1]=2;exception
@@ -124,18 +128,79 @@ main(List<String> mList) {
   //如果函数只包含一条语句，可以使用箭头符号来缩短它
   l.forEach((it) => mPrint(it));
 
+  void interFun() {
+    var interZhou = new BigStudent("猪猪女孩", 18);
+    print(smallZhou);
+    print(bigZhou);
+    print(interZhou);
+  }
 
+  void calculate() {
+    try {
+      double i = 4 / 0;
+      print(i);
+      throwException();
+    } on Exception catch (e) {
+      print(e);
+    } catch (e) {
+      print(e);
+//      rethrow;
+    } finally {
+      print("error happened");
+    }
+  }
+
+// var stu2=const Student("不愿意透露姓名的陈某某", 22);
+
+  calculate();
+  interFun();
+
+  Human human = new Human();
+  human.sleep();
+
+  printNum("李静桦");
+  await printNum1("周紫倩");
+  print("ending");
+
+  var now = new DateTime.now();
+  print(now);
+}
+
+Future printNum(String name) async {
+  for (int i = 0; i < 10000; i++) {
+    print("${name}迭代第${i}次");
+  }
+}
+
+Future printNum1(String name) async {
+  for (int i = 0; i < 10000; i++) {
+    print("${name}迭代第${i}次");
+  }
+}
+
+void throwException() {
+  throw "qwqw";
 }
 
 void mPrint(String str) {
   print(str);
 }
 
+class ConstObject {
+  final int x;
+  final int y;
+
+//  int z;
+
+  const ConstObject(this.x, this.y);
+}
+
 class Student {
   String name;
   int age;
 
-  //无效
+  Student.build(this.name, this.age, this._id); //无效
+
   String _id;
 
   Student(this.name, this.age);
@@ -180,6 +245,7 @@ class BigStudent extends Student {
 
 class Test {
   static const name = "test";
+  int _id;
 
   static main() {
     //这里会报错：Undefined name 'static'

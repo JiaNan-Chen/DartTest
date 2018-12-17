@@ -4,7 +4,8 @@ class Teacher {
   String name;
   int age;
   int salary;
-  List<Student> list=[];
+  String _address = "北京四合院";
+  List<Student> list = [];
 
   void addStudent(Student stu) {
     list.add(stu);
@@ -25,3 +26,13 @@ class Teacher {
     return 'Teacher{name: $name, age: $age, solary: $salary}';
   }
 }
+
+class Sleep {
+  void sleep() {
+    print("sleeping");
+  }
+}
+
+class Person {}
+
+class Human extends Person with Sleep {}
